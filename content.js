@@ -1,21 +1,22 @@
-// content.js
-window.addEventListener("load", function load(event){
-    window.removeEventListener("load", load, false); //remove listener, no longer needed
-    alert("The window has loaded");
-    page_load(); 
+window.addEventListener("load", function page_load(event){
+    window.removeEventListener("load", page_load, false);
+    chat_load(); 
 });
 
 function remove_games() {
-    var parent = document.getElementById("js_1");
     var child = document.getElementsByClassName("_497p _11es");
     var childLength = child.length;
     while(child.length > 0){
-        parent.removeChild(child[0]);
+        // removes timestamp from chat
+        if (child[0].previousSibling.className == "_497p _2lpt") {
+            child[0].parentNode.removeChild(child[0].previousSibling);
+        }
+        // removes goddamn game notifications
+        child[0].parentNode.removeChild(child[0]);
     }
 }
 
-function page_load() {
-    alert("Yo this extension is working af");
+function chat_load() {
     setInterval(function call() {
         var chat = document.getElementById("js_1");
         if (chat) {
